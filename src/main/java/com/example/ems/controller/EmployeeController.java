@@ -23,7 +23,15 @@ public class EmployeeController {
         this.service = service;
     }
     
-    // ✅ CREATE (NM004 style using params)
+    /**
+     * Create a new employee
+     * @param firstName
+     * @param lastName
+     * @param email
+     * @param department
+     * @param status
+     * @return
+     */
     @PostMapping("/create")
     public ResponseEntity<EmployeeResponseDTO> create(
             @RequestParam String firstName,
@@ -38,11 +46,21 @@ public class EmployeeController {
         dto.setEmail(email);
         dto.setDepartment(department);
         dto.setStatus(status);
+        
 
         return ResponseEntity.status(201).body(service.add(dto));
     }
 
-    // ✅ UPDATE
+    /**
+     * Update an existing employee
+     * @param id
+     * @param firstName
+     * @param lastName
+     * @param email
+     * @param department
+     * @param status
+     * @return
+     */
     @PostMapping("/update")
     public ResponseEntity<EmployeeResponseDTO> update(
             @RequestParam Long id,
@@ -62,14 +80,23 @@ public class EmployeeController {
         return ResponseEntity.ok(service.update(id, dto));
     }
 
-    // ✅ DELETE (soft delete)
+    /**
+     * Soft delete an employee (mark as INACTIVE)
+     * @param id
+     * @return
+     */
     @PostMapping("/delete")
     public ResponseEntity<String> delete(@RequestParam Long id) {
         service.delete(id);
         return ResponseEntity.ok("Employee marked as INACTIVE");
     }
 
-    // ✅ GET ALL (with params)
+    /**
+     * Get all employees with pagination
+     * @param page
+     * @param size
+     * @return
+     */
     @GetMapping("/list")
     public ResponseEntity<List<EmployeeResponseDTO>> getAll(
             @RequestParam(defaultValue = "0") int page,
@@ -78,7 +105,13 @@ public class EmployeeController {
         return ResponseEntity.ok(service.getAll(page, size));
     }
 
-    // ✅ SEARCH
+    /**
+     * Search employees by keyword (first name, last name, email, department) with pagination
+     * @param keyword
+     * @param page
+     * @param size
+     * @return
+     */
     @GetMapping("/search")
     public ResponseEntity<List<EmployeeResponseDTO>> search(
             @RequestParam String keyword,
