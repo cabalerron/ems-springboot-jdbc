@@ -45,7 +45,6 @@ public class ValidationUtils {
             return false ;
         }
 
-
         return !sParam.matches( "^[a-zA-Z0-9]*$" ) ;
     }
 
@@ -76,7 +75,6 @@ public class ValidationUtils {
             return false ;
         }
 
-
         SimpleDateFormat sdf = new SimpleDateFormat( "yyyy/MM/dd" ) ;
         sdf.setLenient( false ) ;
 
@@ -88,11 +86,4 @@ public class ValidationUtils {
         }
         return false ;
     }
-
-    // public static Boolean adminAccess(
-    //     String sParam ) {
-
-    //     return !PortalConstants.ADMIN_ROLE.equals(sParam);
-    // }
-    
 }
